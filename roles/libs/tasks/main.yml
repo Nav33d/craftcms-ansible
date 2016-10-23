@@ -1,0 +1,21 @@
+---
+- name: Install useful libs
+  apt: name={{ item }} state=present
+  with_items:
+    - composer
+    - zip
+    - unzip
+    - nodejs-legacy
+    - npm
+    - iftop
+    - ifstat
+    - htop
+    - fail2ban
+    - letsencrypt
+
+- name: Install NPM packages globally
+  command: "{{ item }}"
+  with_items:
+    - "npm install -g gulp-cli"
+    - "npm install -g yarn"
+    - "npm install -g bower"

@@ -1,0 +1,16 @@
+---
+- name: Add new user
+  user: name={{ user_name }} password={{ user_password | password_hash('sha512') }}
+        shell=/bin/bash groups=sudo append=yes update_password=on_create
+
+- name: Setup SSH key
+  authorized_key: user={{ user_name }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+# Disable Root Access
+- name: Remove SSHd Config file
+  file: dest=/etc/ssh/sshd_config state=absent
+
+- name: Add new SSH config file
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config mode=0644
+  notify:
+    - Restart SSH Service

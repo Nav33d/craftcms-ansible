@@ -1,0 +1,10 @@
+---
+- hosts: server
+  become: yes
+  user: admin
+  vars:
+    domain: test.com
+    email: test@gmail.com
+
+  roles:
+    - ssl

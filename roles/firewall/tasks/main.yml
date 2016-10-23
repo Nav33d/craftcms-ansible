@@ -1,0 +1,18 @@
+---
+- name: Enable Firewall
+  ufw: state=enabled policy=reject
+
+- name: Allow SSH access
+  ufw: rule=allow port=22
+
+- name: Allow port 80
+  ufw: rule=allow port=80
+
+- name: Allow port 443 https
+  ufw: rule=allow port=443
+
+- name: Allow port 3306 mysql
+  ufw: rule=allow port=3306
+
+- name: Reload nginx
+  service: name=nginx state=reloaded

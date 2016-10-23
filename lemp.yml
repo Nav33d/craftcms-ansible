@@ -1,0 +1,13 @@
+---
+- hosts: server
+  become: yes
+  user: root
+
+  roles:
+    - nginx
+    - php
+    - mysql
+    - libs
+    - firewall
+    - users
+

@@ -1,0 +1,14 @@
+---
+- name: Add site config
+  template: src=site.j2 dest=/etc/nginx/sites-available/{{ domain }} owner=root group=root
+
+- name: Enable config
+  file: src=/etc/nginx/sites-available/{{ domain }} dest=/etc/nginx/sites-enabled/{{ domain }} state=link
+  notify: Reload nginx
+
+- name: Create project folder
+  file: path=/var/www/{{ domain }} state=directory group=www-data recurse=yes
+
+- name: Add to hosts file
+  lineinfile: dest=/etc/hosts line="127.0.0.1 {{ domain }} www.{{ domain }}"
+

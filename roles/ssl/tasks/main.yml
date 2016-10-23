@@ -1,0 +1,15 @@
+---
+- name: Generate SSL Certificate
+  shell: letsencrypt certonly --webroot -w /var/www/{{ domain }}/public -d {{ domain }} -d www.{{ domain }} --non-interactive --agree-tos --email {{ email }}
+
+- name: Generate strong Diffie-Hellman group
+  shell: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+- name: Create SSL server block
+  template: src=ssl-conf.j2 dest=/etc/nginx/sites-available/{{ domain }} owner=root group=root
+
+- name: Reload nginx
+  service: name=nginx state=reloaded
+
+- name: Add SSL renew file
+  template: src=renew.j2 dest=/etc/cron.monthly/letsencrypt owner=root group=root

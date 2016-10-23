@@ -1,0 +1,24 @@
+---
+- name: Set Time zone
+  file: src=/usr/share/zoneinfo/{{ my_timezone }} dest=/etc/localtime state=link force=yes
+  notify:
+    - Update timezone
+
+- name: Add nginx repo
+  apt_repository: repo='ppa:nginx/stable' state=present
+
+- name: Install nginx
+  apt: name=nginx state=latest update_cache=true
+  notify:
+    - Start nginx
+
+- name: Add H5BP config
+  copy: src=h5bp dest=/etc/nginx owner=root group=root
+
+- name: Add site config
+  template: src=default.j2 dest=/etc/nginx/sites-available/default owner=root group=root
+
+- name: Add default index.php page
+  template: src=index.j2 dest=/var/www/html/index.php owner=root group=root
+
+

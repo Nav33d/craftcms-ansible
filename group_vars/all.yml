@@ -1,0 +1,24 @@
+---
+domain: test.com # DO NOT USE THIS Define domain in site.yml and ssl.yml playbook
+
+# Timezone
+my_timezone: Europe/London
+
+# Server User as root access will be disabled
+user_name: admin
+user_password: password
+
+# PHP Vars
+php_max_execution_time: 30
+php_memory_limit: 256M
+php_display_errors: Off
+php_display_startup_errors: Off
+php_html_errors: On
+php_post_max_size: 32M
+php_upload_max_filesize: 32M
+php_date_timezone: Europe/London
+
+# MySQL Vars
+# mysql_root_password: secret  # No need for this
+mysql_user: admin
+mysql_password: password
