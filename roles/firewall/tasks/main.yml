@@ -14,5 +14,8 @@
 - name: Allow port 3306 mysql
   ufw: rule=allow port=3306
 
+- name: Allow port 25 smtp
+  ufw: rule=allow port=25
+
 - name: Reload nginx
   service: name=nginx state=reloaded

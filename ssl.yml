@@ -1,9 +1,9 @@
 ---
 - hosts: server
   become: yes
-  user: admin
+  user: deploy
   vars:
-    domain: test.com
+    domain: naveedziarab.co.uk
     email: test@gmail.com
 
   roles:
