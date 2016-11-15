@@ -1,6 +1,4 @@
 ---
-domain: test.com # DO NOT USE THIS Define domain in site.yml and ssl.yml playbook
-
 # Timezone
 my_timezone: Europe/London
 
@@ -18,7 +16,12 @@ php_post_max_size: 32M
 php_upload_max_filesize: 32M
 php_date_timezone: Europe/London
 
+
 # MySQL Vars
-# mysql_root_password: secret  # No need for this
-mysql_user: admin
-mysql_password: password
+mysql_root_password: root
+
+mysql_users:
+  - name: admin
+    host: "%"
+    password: root
+    priv: "*.*:ALL"

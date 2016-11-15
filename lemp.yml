@@ -6,7 +6,8 @@
   roles:
     - nginx
     - php
-    - mysql
+    - { role: geerlingguy.mysql } # This role is now setting up MySQL and users
+    - mysql # This role is fixing Craft CMS v2 MySQL bug
     - libs
     - firewall
     - users

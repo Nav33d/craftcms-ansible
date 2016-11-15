@@ -1,21 +1,9 @@
 ---
-# - name: Set MySQL root password before installing
-#   debconf: name='mysql-server' question='mysql-server/root_password' value='{{mysql_root_password | quote}}' vtype='password'
-
-# - name: Confirm MySQL root password before installing
-#   debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{mysql_root_password | quote}}' vtype='password'
-
-- name: Install MySQL
-  apt: pkg=mysql-server state=latest update_cache=true
-
-- name: Install Python MySQLdb module
-  apt: name=python-mysqldb state=present
-
-- name: Create MySQL User
-  mysql_user: name={{ mysql_user }} password={{ mysql_password }} priv=*.*:ALL state=present
-
-- name: Removes all anonymous user accounts
-  mysql_user: name='' host=localhost state=absent
-
-- name: Removes root user access
-  mysql_user: name='root' host=localhost state=absent
+- name: Fix Craft CMS MySQL Group By issue
+  lineinfile:
+      dest=/etc/mysql/my.cnf
+      regexp="^sql_mode"
+      line="sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+      insertafter="^\[mysqld\]"
+      state=present
+  notify: restart mysql

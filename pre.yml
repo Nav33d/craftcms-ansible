@@ -1,0 +1,9 @@
+---
+- hosts: server
+  user: root
+  gather_facts: no
+
+  pre_tasks:
+    - name: Install Python
+      raw: sudo apt install python-minimal -y
+

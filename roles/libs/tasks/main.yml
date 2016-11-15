@@ -12,10 +12,15 @@
     - htop
     - fail2ban
     - letsencrypt
+    - vim
+    - git
+    - curl
+    - postfix
+    - mailutils
+    - apache2-utils
 
 - name: Install NPM packages globally
   command: "{{ item }}"
   with_items:
     - "npm install -g gulp-cli"
-    - "npm install -g yarn"
     - "npm install -g bower"

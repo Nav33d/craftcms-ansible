@@ -4,9 +4,6 @@
   notify:
     - Update timezone
 
-- name: Add nginx repo
-  apt_repository: repo='ppa:nginx/stable' state=present
-
 - name: Install nginx
   apt: name=nginx state=latest update_cache=true
   notify:
