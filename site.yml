@@ -3,7 +3,7 @@
   become: yes
   user: admin # /user which was created when setting up lemp stack
   vars:
-    domain: naveedziarab.co.uk 
+    domain: test.com 
   
   roles:
     - site

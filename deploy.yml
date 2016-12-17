@@ -1,0 +1,24 @@
+---
+- hosts: server
+  become: yes
+  user: admin # user which was created when setting up lemp stack
+  vars:
+    repo: git@github.com:Nav33d/test.git #Github repo
+    dest: /var/www/test.com # Folder on server where website will be deployed
+
+
+  ## Tasks to deploy from Github
+
+  tasks:
+    - name: Add ssh agent line to sudoers
+      lineinfile: 
+        dest: /etc/sudoers
+        state: present
+        regexp: SSH_AUTH_SOCK
+        line: Defaults env_keep += "SSH_AUTH_SOCK"
+
+    - name: Deploy from github
+      git: 
+        repo: "{{repo}}"
+        dest: "{{dest}}"
+        accept_hostkey: yes
