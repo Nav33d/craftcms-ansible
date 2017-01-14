@@ -1,4 +1,9 @@
 ---
+
+- name: Replacing package mirrors with the default ubuntu ones
+  shell: sed -i 's/mirrors\.linode\.com/us\.archive\.ubuntu\.com/g' /etc/apt/sources.list
+  when: linode
+
 - name: Set Time zone
   file: src=/usr/share/zoneinfo/{{ my_timezone }} dest=/etc/localtime state=link force=yes
   notify:

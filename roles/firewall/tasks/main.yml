@@ -1,6 +1,6 @@
 ---
 - name: Enable Firewall
-  ufw: state=enabled policy=reject
+  ufw: state=enabled policy=allow
 
 - name: Allow SSH access
   ufw: rule=allow port=22
@@ -16,6 +16,9 @@
 
 - name: Allow port 25 smtp
   ufw: rule=allow port=25
+
+- name: Reject Default Policy
+  ufw: state=enabled policy=reject
 
 - name: Reload nginx
   service: name=nginx state=reloaded

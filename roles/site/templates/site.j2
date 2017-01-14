@@ -1,5 +1,6 @@
 server {
     listen 80;
+    listen [::]:80;
 
     root /var/www/{{ domain }}/public;
     index index.html index.htm index.php;

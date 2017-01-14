@@ -2,6 +2,8 @@
 - hosts: server
   become: yes
   user: root
+  vars:
+    linode: false
 
   roles:
     - nginx

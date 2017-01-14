@@ -1,7 +1,7 @@
 ---
 - name: Add new user
   user: name={{ user_name }} password={{ user_password | password_hash('sha512') }}
-        shell=/bin/bash groups=sudo append=yes
+        shell=/bin/bash groups=sudo,www-data append=yes
 
 - name: Setup SSH key
   authorized_key: user={{ user_name }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
